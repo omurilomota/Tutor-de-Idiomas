@@ -26,7 +26,8 @@ static func load_directory(dir_path: String) -> Dictionary:
 		if not dir.current_is_dir() and file_name.ends_with(".json"):
 			var full_path := dir_path.path_join(file_name)
 			var data := load_dialogue(full_path)
-			if not data.is_empty():
+			# Ignora arquivos que não são diálogo (ex.: schema.json).
+			if data.has("nodes") and data.has("start"):
 				var key := str(data.get("id", file_name.get_basename()))
 				result[key] = data
 		file_name = dir.get_next()

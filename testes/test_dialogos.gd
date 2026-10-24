@@ -32,6 +32,10 @@ func _testa_dialogo_do_mvp(t) -> void:
 			objectives += 1
 	t.check(objectives == 3, "sala_01.json tem 3 objetivos físicos (luz, TV, ar)")
 
+	var all_dialogues := Loader.load_directory("res://dialogos")
+	t.check(all_dialogues.size() == 1, "pasta dialogos/ contém só o diálogo do MVP (schema.json é ignorado)")
+	t.check(all_dialogues.has("sala_01"), "loader indexa o diálogo pelo id")
+
 
 func _testa_erros_esperados(t) -> void:
 	var next_inexistente := {
