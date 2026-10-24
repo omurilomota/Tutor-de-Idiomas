@@ -14,6 +14,8 @@ e rende uma palavra nova no vocabulário.
 [![Godot](https://img.shields.io/badge/Godot-4.6-478CBF?logo=godotengine&logoColor=white)](https://godotengine.org)
 [![Licença](https://img.shields.io/badge/c%C3%B3digo-MIT-green)](LICENSE)
 
+### [▶ Jogar no navegador](https://omurilomota.github.io/Tutor-de-Idiomas/)
+
 ---
 
 ## O que já funciona
@@ -21,7 +23,7 @@ e rende uma palavra nova no vocabulário.
 - Projeto Godot 4.6.3 com renderer **Compatibility (GLES3)**, pensado para PC fraco.
 - Simulação de energia com 4 dispositivos e baseline calculado pela mesma fórmula.
 - Árvore de diálogo do MVP (`dialogos/sala_01.json`) com 3 objetivos físicos.
-- Validador de diálogos + testes headless (28 verificações) no CI.
+- Validador de diálogos + testes headless (30 verificações) no CI.
 - Build web sem threads, publicado no GitHub Pages.
 
 ## Stack

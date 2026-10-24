@@ -21,7 +21,7 @@ pessoa (≈ 4–5 semanas no total).
 - [x] Estrutura de pastas e propriedade definidas.
 - [x] 4 autoloads com sinais e stubs funcionais.
 - [x] `dados/` e `dialogos/sala_01.json` validados por teste.
-- [x] Testes headless (28 verificações) verdes.
+- [x] Testes headless (30 verificações) verdes.
 - [x] CI + export web.
 - [x] Documentação 0.1.
 

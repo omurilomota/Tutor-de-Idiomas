@@ -53,7 +53,7 @@ Saída esperada:
 
 ```
 == Home Switch — testes ==
-Verificações: 28 | Falhas: 0
+Verificações: 30 | Falhas: 0
 OK
 ```
 
@@ -159,7 +159,7 @@ Editar `.github/CODEOWNERS` com os usuários reais e ativar
 
 - [ ] Instalou Godot 4.6.3.
 - [ ] Clonou o repositório.
-- [ ] Rodou `--import` e os testes (28 OK).
+- [ ] Rodou `--import` e os testes (30 OK).
 - [ ] Leu `docs/02-ARQUITETURA.md` e `docs/06-DIVISAO-TRABALHO.md`.
 - [ ] Criou a branch `feat/<area>-<nome>`.
 - [ ] Abriu o primeiro PR pequeno.
