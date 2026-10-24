@@ -1,0 +1,45 @@
+{
+  "versao": 1,
+  "dispositivos": [
+    {
+      "id": "lampada_sala",
+      "nome_pt": "Lâmpada da sala",
+      "nome_en": "Living room lamp",
+      "comodo": "sala",
+      "watt_on": 60,
+      "watt_standby": 0,
+      "watt_eco": 0,
+      "ligado_inicial": true
+    },
+    {
+      "id": "tv_sala",
+      "nome_pt": "TV da sala",
+      "nome_en": "Living room TV",
+      "comodo": "sala",
+      "watt_on": 110,
+      "watt_standby": 8,
+      "watt_eco": 0,
+      "ligado_inicial": true
+    },
+    {
+      "id": "ar_sala",
+      "nome_pt": "Ar-condicionado",
+      "nome_en": "Air conditioner",
+      "comodo": "sala",
+      "watt_on": 1400,
+      "watt_standby": 5,
+      "watt_eco": 900,
+      "ligado_inicial": true
+    },
+    {
+      "id": "tomada_carregador",
+      "nome_pt": "Carregador na tomada",
+      "nome_en": "Charger plugged in",
+      "comodo": "sala",
+      "watt_on": 5,
+      "watt_standby": 0,
+      "watt_eco": 0,
+      "ligado_inicial": true
+    }
+  ]
+}

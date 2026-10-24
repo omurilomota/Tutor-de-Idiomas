@@ -1,0 +1,22 @@
+# Donos por pasta (um dono por arquivo — ver docs/06-DIVISAO-TRABALHO.md)
+#
+# TODO: trocar @omurilomota pelos usuários reais quando entrarem no repositório.
+# Enquanto a equipe não estiver no GitHub, o mantenedor aprova tudo.
+
+*                       @omurilomota
+
+/cenas/                 @omurilomota
+/assets/                @omurilomota
+/project.godot          @omurilomota
+/export_presets.cfg     @omurilomota
+
+/dialogos/              @omurilomota
+/scripts/dialogos/      @omurilomota
+/scripts/player/        @omurilomota
+/scripts/ui/dialogo/    @omurilomota
+
+/scripts/energia/       @omurilomota
+/scripts/ui/hud/        @omurilomota
+/dados/                 @omurilomota
+/testes/                @omurilomota
+/.github/               @omurilomota

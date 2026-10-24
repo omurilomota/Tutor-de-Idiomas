@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+jobs:
+  testes:
+    name: Testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Godot 4.6.3
+        run: |
+          wget -q https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          unzip -q Godot_v4.6.3-stable_linux.x86_64.zip
+          chmod +x Godot_v4.6.3-stable_linux.x86_64
+          sudo mv Godot_v4.6.3-stable_linux.x86_64 /usr/local/bin/godot
+          godot --version
+
+      - name: Importar recursos
+        run: godot --headless --path . --import
+
+      - name: Rodar testes
+        run: godot --headless --path . --script testes/run_tests.gd
+
+      - name: Validar JSONs
+        run: |
+          for file in dados/*.json dialogos/*.json; do
+            echo "validando $file"
+            python3 -m json.tool "$file" > /dev/null
+          done

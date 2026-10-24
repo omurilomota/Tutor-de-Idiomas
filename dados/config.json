@@ -1,0 +1,12 @@
+{
+  "versao": 1,
+  "tarifa_brl_kwh": 0.75,
+  "co2_kg_por_kwh": 0.084,
+  "escala_tempo": 120.0,
+  "inicio_minutos": 480,
+  "fim_minutos": 1320,
+  "meta_economia_pct": 20.0,
+  "moeda": "BRL",
+  "fonte_tarifa": "ANEEL — tarifa residencial média; valor configurável para a demo",
+  "fonte_co2": "MCTI — fator médio do SIN (ordem de grandeza); valor configurável"
+}

@@ -1,0 +1,19 @@
+# Godot 4
+.godot/
+/build/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Credenciais de exportação (nunca commitar)
+export_credentials.cfg
+*.keystore
+*.jks
+
+# Editores
+.idea/
+.vscode/
+*.code-workspace

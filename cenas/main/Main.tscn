@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cubo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_verde"]
+albedo_color = Color(0.18, 0.76, 0.49, 1)
+roughness = 0.65
+metallic = 0.1
+
+[node name="Main" type="Node3D"]
+
+[node name="Cubo" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_cubo")
+surface_material_override/0 = SubResource("StandardMaterial3D_verde")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 4.2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 3)
+shadow_enabled = false
+light_energy = 1.1
+
+[node name="Titulo" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 640.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 28
+text = "Home Switch — Fase 0"
+
+[node name="Subtitulo" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 760.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 16
+text = "Prova de vida: cubo + câmera + luz, renderer Compatibility."
+
+[node name="Dica" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 650.0
+offset_right = 900.0
+offset_bottom = 690.0
+theme_override_font_sizes/font_size = 15
+text = "Próximo gate: rodar a ≥30 FPS no PC fraco da equipe e abrir o build web."

@@ -1,0 +1,142 @@
+{
+  "id": "sala_01",
+  "titulo": "Primeiro dia na sala",
+  "descricao": "Introdução ao apartamento: apagar a luz, desligar a TV e colocar o ar no modo eco.",
+  "start": "intro",
+  "nodes": {
+    "intro": {
+      "speaker": "Alex",
+      "en": "Hey! You must be the new roommate. Welcome home!",
+      "pt": "Ei! Você deve ser o novo colega de quarto. Bem-vindo!",
+      "choices": [
+        {
+          "en": "Hi! Nice to meet you.",
+          "pt": "Oi! Prazer em conhecer você.",
+          "next": "pedido_luz"
+        },
+        {
+          "en": "Sorry, I don't speak much English.",
+          "pt": "Desculpe, não falo muito inglês.",
+          "next": "ajuda"
+        }
+      ]
+    },
+    "ajuda": {
+      "speaker": "Alex",
+      "en": "No problem! I'll speak slowly. Let's start with the lights.",
+      "pt": "Sem problema! Vou falar devagar. Vamos começar com as luzes.",
+      "next": "pedido_luz"
+    },
+    "pedido_luz": {
+      "speaker": "Alex",
+      "en": "It's daytime, so could you turn off the light?",
+      "pt": "É dia, então você pode apagar a luz?",
+      "choices": [
+        {
+          "en": "Sure, I'll turn it off.",
+          "pt": "Claro, vou apagar.",
+          "next": "objetivo_luz"
+        },
+        {
+          "en": "Where is the switch?",
+          "pt": "Onde fica o interruptor?",
+          "next": "dica_luz"
+        }
+      ]
+    },
+    "dica_luz": {
+      "speaker": "Alex",
+      "en": "Walk to the lamp and press E. Easy!",
+      "pt": "Vá até a lâmpada e aperte E. Fácil!",
+      "next": "objetivo_luz"
+    },
+    "objetivo_luz": {
+      "speaker": "Alex",
+      "en": "Go ahead: turn off the light.",
+      "pt": "Vai lá: apague a luz.",
+      "objective": { "device": "lampada_sala", "state": "off" },
+      "next": "luz_ok"
+    },
+    "luz_ok": {
+      "speaker": "Alex",
+      "en": "Perfect! That's 'turn off the light'.",
+      "pt": "Perfeito! Isso é 'turn off the light'.",
+      "vocab": [{ "en": "turn off the light", "pt": "apagar a luz" }],
+      "next": "pedido_tv"
+    },
+    "pedido_tv": {
+      "speaker": "Alex",
+      "en": "Now the TV is on and nobody is watching. Could you turn it off?",
+      "pt": "Agora a TV está ligada e ninguém está assistindo. Você pode desligá-la?",
+      "choices": [
+        {
+          "en": "I'll turn it off.",
+          "pt": "Vou desligar.",
+          "next": "objetivo_tv"
+        },
+        {
+          "en": "Can I watch it later?",
+          "pt": "Posso assistir depois?",
+          "next": "tv_depois"
+        }
+      ]
+    },
+    "tv_depois": {
+      "speaker": "Alex",
+      "en": "Sure, but let's save energy now. Turn it off, please.",
+      "pt": "Claro, mas vamos economizar agora. Desligue, por favor.",
+      "next": "objetivo_tv"
+    },
+    "objetivo_tv": {
+      "speaker": "Alex",
+      "en": "Press E near the TV to turn it off.",
+      "pt": "Aperte E perto da TV para desligá-la.",
+      "objective": { "device": "tv_sala", "state": "off" },
+      "next": "tv_ok"
+    },
+    "tv_ok": {
+      "speaker": "Alex",
+      "en": "Great! The TV uses 110 watts. That's 'turn off the TV'.",
+      "pt": "Ótimo! A TV usa 110 watts. Isso é 'turn off the TV'.",
+      "vocab": [{ "en": "turn off the TV", "pt": "desligar a TV" }],
+      "next": "pedido_ar"
+    },
+    "pedido_ar": {
+      "speaker": "Alex",
+      "en": "The air conditioner is freezing. Can you set it to eco mode?",
+      "pt": "O ar-condicionado está congelando. Você pode colocá-lo no modo eco?",
+      "choices": [
+        {
+          "en": "Sure, eco mode it is.",
+          "pt": "Claro, modo eco nele.",
+          "next": "objetivo_ar"
+        },
+        {
+          "en": "What is eco mode?",
+          "pt": "O que é modo eco?",
+          "next": "eco_explica"
+        }
+      ]
+    },
+    "eco_explica": {
+      "speaker": "Alex",
+      "en": "Eco mode uses less power. Press E near the air conditioner until it shows eco.",
+      "pt": "O modo eco usa menos energia. Aperte E perto do ar-condicionado até aparecer eco.",
+      "next": "objetivo_ar"
+    },
+    "objetivo_ar": {
+      "speaker": "Alex",
+      "en": "Set the air conditioner to eco.",
+      "pt": "Coloque o ar-condicionado no modo eco.",
+      "objective": { "device": "ar_sala", "state": "eco" },
+      "next": "fim"
+    },
+    "fim": {
+      "speaker": "Alex",
+      "en": "Nice work! You saved energy and learned some English. Let's check the report.",
+      "pt": "Bom trabalho! Você economizou energia e aprendeu inglês. Vamos ver o relatório.",
+      "end": true,
+      "vocab": [{ "en": "save energy", "pt": "economizar energia" }]
+    }
+  }
+}
