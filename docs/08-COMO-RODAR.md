@@ -127,6 +127,7 @@ Não commitar builds: `build/` está no `.gitignore`.
 | Input não responde | layout de teclado / Input Map | testar com `physical_keycode`; conferir Project Settings → Input Map |
 | FPS baixo | sombras/AA/escala | conferir `project.godot`; reduzir `scaling_3d/scale` |
 | Flatpak não vê o projeto | permissão de pasta | usar binário oficial ou `flatpak override --filesystem=home` |
+| Deploy de tag falha | política do ambiente `github-pages` só permite `main` | adicionar política de tag `v*` em Settings → Environments → github-pages |
 
 ## Configuração do GitHub (uma vez)
 
