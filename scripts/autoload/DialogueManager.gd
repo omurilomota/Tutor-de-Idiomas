@@ -40,6 +40,14 @@ func list_ids() -> Array:
 	return dialogues.keys()
 
 
+func has_dialogue(dialogue_id: String) -> bool:
+	return dialogues.has(dialogue_id)
+
+
+func current_objective() -> Dictionary:
+	return _objective.duplicate(true)
+
+
 func start(dialogue_id: String) -> bool:
 	if not dialogues.has(dialogue_id):
 		push_error("Diálogo não encontrado: %s" % dialogue_id)
@@ -116,6 +124,9 @@ func _go_to(node_id: String) -> void:
 			str(_objective.get("device", "")),
 			str(_objective.get("state", ""))
 		)
+		# Se o estado pedido já vale (ex.: jogador apagou a luz antes),
+		# não deixa o diálogo travado para sempre.
+		_check_objective_now()
 		return
 
 	line_shown.emit(current_node)
@@ -136,20 +147,35 @@ func _on_device_changed(device_id: String, is_on: bool, _watts: float) -> void:
 		return
 	if str(_objective.get("device", "")) != device_id:
 		return
+	if not _matches(device_id, is_on, str(_objective.get("state", ""))):
+		return
+	_complete_objective(device_id)
 
-	var target := str(_objective.get("state", ""))
-	var matches := false
+
+func _check_objective_now() -> void:
+	if not waiting_objective:
+		return
+	var device_id := str(_objective.get("device", ""))
+	var device = EnergyManager.get_device(device_id)
+	if device == null:
+		return
+	if _matches(device_id, device.is_on, str(_objective.get("state", ""))):
+		_complete_objective(device_id)
+
+
+func _matches(device_id: String, is_on: bool, target: String) -> bool:
 	match target:
 		"off":
-			matches = not is_on
+			return not is_on
 		"on":
-			matches = is_on
+			return is_on
 		"eco":
 			var device = EnergyManager.get_device(device_id)
-			matches = device != null and device.state_name() == "eco"
-	if not matches:
-		return
+			return device != null and device.state_name() == "eco"
+	return false
 
+
+func _complete_objective(device_id: String) -> void:
 	waiting_objective = false
 	_objective = {}
 	objective_completed.emit(device_id)

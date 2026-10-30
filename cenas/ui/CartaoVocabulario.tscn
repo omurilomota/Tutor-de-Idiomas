@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogo/CartaoVocabulario.gd" id="1_204ga"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1ow7"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.12, 0.3, 0.22, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.85, 0.6, 0.5)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CartaoVocabulario" type="PanelContainer" unique_id=394077695]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 200.0
+offset_right = 250.0
+offset_bottom = 315.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l1ow7")
+script = ExtResource("1_204ga")
+
+[node name="Margem" type="MarginContainer" parent="." unique_id=819596860]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="Conteudo" type="VBoxContainer" parent="Margem" unique_id=1464711229]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 3
+
+[node name="Cabecalho" type="Label" parent="Margem/Conteudo" unique_id=2048649496]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.6, 0.9, 0.72, 1)
+text = "NOVA PALAVRA / NEW WORD"
+
+[node name="TextoEN" type="Label" parent="Margem/Conteudo" unique_id=2015761682]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.96, 0.97, 0.98, 1)
+
+[node name="TextoPT" type="Label" parent="Margem/Conteudo" unique_id=953173818]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.82, 0.9, 0.86, 1)

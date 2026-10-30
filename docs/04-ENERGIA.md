@@ -17,7 +17,8 @@ E_kWh += P_W × dt_s / 3_600_000
 
 O relógio anda com `escala_tempo = 120`: **1 segundo real = 2 minutos de jogo**.
 O dia vai de 08:00 a 22:00 (840 min) → **7 minutos reais** por partida.
-Durante o diálogo o tempo pausa (`EnergyManager.paused = true`).
+Durante o diálogo o tempo pausa (`EnergyManager.paused = true`) e volta quando a última
+fala fecha. `F4` encerra o dia na hora (atalho de debug/apresentação).
 
 ## Dispositivos
 
@@ -25,33 +26,42 @@ Durante o diálogo o tempo pausa (`EnergyManager.paused = true`).
 |---|---|---|---|---|
 | `lampada_sala` | 60 W | 0 W | — | sem standby |
 | `tv_sala` | 110 W | 8 W | — | desligar não zera o consumo |
-| `ar_sala` | 1400 W | 5 W | 900 W | ciclo `on → eco → off` |
+| `ar_sala` | 1400 W | 5 W | **550 W** | ciclo `on → eco → off` |
 | `tomada_carregador` | 5 W | 0 W | — | “off” = fora da tomada |
 
 Regra de interação: dispositivos com `watt_eco > 0` ciclam `on → eco → off`; os demais
 alternam `on ↔ off`. O estado vive em `EnergyDevice` e é publicado no barramento simulado.
+Cada mudança também emite `device_changed`, que o HUD, o `EnergyDevice3D` e o
+`DialogueManager` escutam.
 
 ## Baseline (a conta que a banca vai conferir)
 
 O baseline **não é um número fixo**: é a mesma função de consumo rodando com o perfil
-`dados/baseline.json` (tudo ligado, ar a 18 °C por 6 h).
+`dados/baseline.json` (tudo ligado das 08:00 às 22:00, ar em 18 °C o dia inteiro).
 
 ```
 baseline_kwh = Σ (watt_on × horas_ligado + watt_standby × (horas_do_dia − horas_ligado)) / 1000
 ```
 
-Com os dados atuais (`horas_do_dia = 14`):
+Com os dados atuais (`horas_do_dia = 14`, `horas_ligado = 14` para todos):
 
 | Dispositivo | Conta | kWh |
 |---|---|---|
 | Lâmpada | 60 × 14 / 1000 | 0,84 |
 | TV | 110 × 14 / 1000 | 1,54 |
-| Ar | (1400 × 6 + 5 × 8) / 1000 | 8,44 |
+| Ar | 1400 × 14 / 1000 | 19,60 |
 | Carregador | 5 × 14 / 1000 | 0,07 |
-| **Total** | | **10,89** |
+| **Total** | | **22,05** |
 
-Custo baseline: `10,89 × 0,75 = R$ 8,17`.
-CO₂ baseline: `10,89 × 0,084 = 0,915 kg`.
+Custo baseline: `22,05 × 0,75 = R$ 16,54`.
+CO₂ baseline: `22,05 × 0,084 = 1,852 kg`.
+
+> **Mudança registrada:** o baseline antigo deixava o ar ligado só 6 h. Com ar em eco de
+> 900 W e o jogador deixando-o ligado o dia inteiro, o consumo ficava **maior** que o
+> baseline — ou seja, “obedecer ao pedido de eco” piorava a nota. Agora o baseline é o
+> cenário honesto de “não fazer nada” (tudo ligado 14 h) e o eco de 550 W garante que a
+> terceira missão realmente economiza. Os números antigos de 8%/22%/65% foram
+> substituídos pelos medidos abaixo.
 
 ## Relatório
 
@@ -63,17 +73,32 @@ co2_evitado   = economia_kwh × fator_co2
 nota          = A ≥30% | B ≥20% | C ≥10% | D <10%
 ```
 
-Exemplo de partida otimizada:
+Exemplo de partida ótima (luz apagada, TV desligada, ar em eco, carregador fora):
 
 | Dispositivo | Uso do jogador | kWh |
 |---|---|---|
-| Lâmpada | 2 h ligada | 0,12 |
-| TV | 2 h ligada + 12 h standby | 0,316 |
-| Ar | 1 h normal + 2 h eco + 11 h standby | 3,255 |
+| Lâmpada | desligada | 0,00 |
+| TV | desligada, em standby 8 W por 14 h | 0,112 |
+| Ar | eco 550 W por 14 h | 7,70 |
 | Carregador | fora da tomada | 0,00 |
-| **Total** | | **3,691** |
+| **Total** | | **7,812** |
 
-Economia: `(10,89 − 3,691) / 10,89 = 66,1%` → nota **A**, R$ 5,40 e 0,60 kg CO₂ evitados.
+Economia: `(22,05 − 7,812) / 22,05 = 64,6%` → nota **A**, R$ 10,68 e 1,196 kg CO₂ evitados.
+É exatamente a tela de `docs/img/relatorio.png`.
+
+## Balanceamento medido
+
+| Cenário | Cálculo | Economia |
+|---|---|---|
+| Não faz nada | 22,05 kWh | 0,0% |
+| Só apaga a luz | 22,05 − 0,84 | 3,8% |
+| Luz + TV | 22,05 − 0,84 − 1,428 (TV fica em standby) | 10,3% |
+| Luz + TV + ar em eco + carregador | 22,05 − 14,238 | **64,6%** |
+| Tudo desligado (ar off) | 22,05 − 0,112 | 99,5% |
+
+A meta de 20% exige a terceira missão: só luz + TV dá 10,3% (nota C). Fazer os três
+pedidos do Alex garante nota A. Esses valores são verificados por
+`testes/test_energia.gd` com tolerância de 0,3–0,6 ponto percentual.
 
 ## Parâmetros (`dados/config.json`)
 
@@ -99,6 +124,7 @@ A banca deve ser informada disso; o doc 09 registra a limitação.
 | CO₂ | `kwh × fator` | a cada frame |
 | Relógio | `clock_minutes` | a cada minuto simulado |
 | Dispositivos | `device_changed` | a cada interação |
+| FPS | `Engine.get_frames_per_second()` | `F3`, a cada 0,25 s |
 
 ## IoT simulado
 
@@ -116,24 +142,19 @@ nem rede. Isso cobre o tema “IoT” de forma honesta (ver doc 09).
 
 `testes/test_energia.gd` verifica:
 
-- consumo ligado/standby/eco;
+- consumo ligado/standby/eco e ciclo do ar (1400 → 550 → off);
 - baseline de 14 h = 1,54 kWh para a TV;
 - relatório: 20% → nota B, R$ 1,50 e conta fechada;
-- simulação de 1 h com os 4 dispositivos reais.
+- cenários do balanceamento (0%, 3,8%, 10,3%, 64,6%);
+- fim do dia pelo relógio (420 s reais → 22:00 → um único relatório);
+- simulação de 1 h com os 4 dispositivos reais (1,575 kWh).
 
 ```bash
 godot --headless --path . --script testes/run_tests.gd
 ```
 
-## Balanceamento
+## Performance
 
-| Cenário | Economia esperada |
-|---|---|
-| Não faz nada | ~0% |
-| Só apaga a luz | ~8% |
-| Luz + TV | ~22% |
-| Luz + TV + ar em eco | ~66% |
-
-Se a meta de 20% estiver fácil demais no playtest, aumentar `watt_on` do ar ou reduzir
-`horas_ligado` do baseline. A regra é: **o jogador precisa entender o pedido em inglês
-para conseguir economizar.**
+`tools/benchmark_fps.gd` roda a partida real a 1280×720. Resultado no renderizador
+**por software** llvmpipe: **≈90–100 FPS** em 300 frames, muito acima do gate de 30 FPS.
+O jogo usa sombras/AA desligados, sem pós-processamento e com poucos triângulos.

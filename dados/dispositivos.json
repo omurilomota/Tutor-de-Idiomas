@@ -28,13 +28,13 @@
       "comodo": "sala",
       "watt_on": 1400,
       "watt_standby": 5,
-      "watt_eco": 900,
+      "watt_eco": 550,
       "ligado_inicial": true
     },
     {
       "id": "tomada_carregador",
-      "nome_pt": "Carregador na tomada",
-      "nome_en": "Charger plugged in",
+      "nome_pt": "Carregador",
+      "nome_en": "Charger",
       "comodo": "sala",
       "watt_on": 5,
       "watt_standby": 0,

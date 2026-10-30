@@ -1,0 +1,65 @@
+{
+  "id": "sala_03",
+  "titulo": "Medidor de energia",
+  "descricao": "Desligar o ar-condicionado e a luminária para ver o medidor cair.",
+  "start": "intro",
+  "nodes": {
+    "intro": {
+      "speaker": "Alex",
+      "en": "The room is cool now. The air conditioner can rest for a while.",
+      "pt": "A sala está fria agora. O ar-condicionado pode descansar um pouco.",
+      "next": "objetivo_ar_off"
+    },
+    "objetivo_ar_off": {
+      "speaker": "Alex",
+      "en": "Press E near the air conditioner until it turns off.",
+      "pt": "Aperte E perto do ar-condicionado até ele desligar.",
+      "objective": { "device": "ar_sala", "state": "off" },
+      "next": "ar_off_ok"
+    },
+    "ar_off_ok": {
+      "speaker": "Alex",
+      "en": "That's 'turn off the air conditioner'. Look at the energy meter!",
+      "pt": "Isso é 'turn off the air conditioner'. Olhe o medidor de energia!",
+      "vocab": [
+        { "en": "turn off the air conditioner", "pt": "desligar o ar-condicionado" },
+        { "en": "energy meter", "pt": "medidor de energia" },
+        { "en": "cool", "pt": "frio, fresco" }
+      ],
+      "next": "pedido_luz_off"
+    },
+    "pedido_luz_off": {
+      "speaker": "Alex",
+      "en": "You turned the light on before. It's daytime again, so please turn it off.",
+      "pt": "Você acendeu a luz antes. É dia de novo, então por favor apague.",
+      "next": "objetivo_luz_off"
+    },
+    "objetivo_luz_off": {
+      "speaker": "Alex",
+      "en": "Turn off the light, please.",
+      "pt": "Apague a luz, por favor.",
+      "objective": { "device": "lampada_sala", "state": "off" },
+      "next": "luz_off_ok"
+    },
+    "luz_off_ok": {
+      "speaker": "Alex",
+      "en": "Five watts here, sixty watts there. It all shows on the meter.",
+      "pt": "Cinco watts aqui, sessenta watts ali. Tudo aparece no medidor.",
+      "vocab": [
+        { "en": "kilowatt", "pt": "quilowatt" },
+        { "en": "measure", "pt": "medir" }
+      ],
+      "next": "fim"
+    },
+    "fim": {
+      "speaker": "Alex",
+      "en": "Now the room is using less energy. Ready to check the numbers?",
+      "pt": "Agora a sala usa menos energia. Pronto para conferir os números?",
+      "vocab": [
+        { "en": "less energy", "pt": "menos energia" },
+        { "en": "numbers", "pt": "números" }
+      ],
+      "end": true
+    }
+  }
+}

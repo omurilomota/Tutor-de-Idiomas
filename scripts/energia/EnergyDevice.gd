@@ -10,6 +10,7 @@ var watt_on: float = 0.0
 var watt_standby: float = 0.0
 var watt_eco: float = 0.0
 var is_on: bool = false
+var initial_on: bool = false
 var mode: String = "normal"
 
 
@@ -21,7 +22,13 @@ func _init(data: Dictionary = {}) -> void:
 	watt_on = float(data.get("watt_on", 0.0))
 	watt_standby = float(data.get("watt_standby", 0.0))
 	watt_eco = float(data.get("watt_eco", 0.0))
-	is_on = bool(data.get("ligado_inicial", false))
+	initial_on = bool(data.get("ligado_inicial", false))
+	is_on = initial_on
+
+
+func reset() -> void:
+	is_on = initial_on
+	mode = "normal"
 
 
 func supports_eco() -> bool:

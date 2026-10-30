@@ -7,25 +7,40 @@
 
 | Asset | Autor | Licença | Link | Onde é usado |
 |---|---|---|---|---|
-| _(a preencher — ex.: Furniture Kit)_ | Kenney | CC0 | https://kenney.nl | sala de estar |
+| Sala, móveis, TV, lâmpada, ar-condicionado e carregador | Equipe Home Switch (geometria procedural low-poly, gerada no próprio projeto) | CC0 / domínio público | — | `cenas/salas/SalaEstar.tscn` |
+| Player (cápsula + câmera) | Equipe Home Switch | CC0 / domínio público | — | `cenas/player/Player.tscn` |
+| Ícone do projeto (`icon.svg`) | Equipe Home Switch | CC0 | — | `project.godot` |
+
+**Nenhum modelo de terceiros foi baixado.** A geometria usa `BoxMesh`, `CylinderMesh`,
+`SphereMesh`, `PlaneMesh` e `QuadMesh` do próprio Godot, com materiais `StandardMaterial3D`
+criados no projeto. Triângulos: poucos milhares (orçamento do GDD: <50k).
 
 ## Texturas
 
 | Asset | Autor | Licença | Link | Onde é usado |
 |---|---|---|---|---|
-| _(a preencher)_ | | | | |
+| _(nenhuma textura externa)_ | — | — | — | materiais com cor sólida |
 
 ## Áudio
 
 | Asset | Autor | Licença | Link | Onde é usado |
 |---|---|---|---|---|
-| _(a preencher)_ | | | | |
+| _(sem áudio no MVP — stretch)_ | — | — | — | — |
 
 ## Fontes
 
 | Fonte | Autor | Licença | Link | Onde é usado |
 |---|---|---|---|---|
-| _(a preencher)_ | | | | |
+| Fonte padrão do Godot (Noto Sans) | Google / Godot Engine | SIL Open Font License 1.1 (OFL) | https://godotengine.org | toda a UI |
+| Emoji do relógio/ícones no README | — | — | — | documentação (não é asset do jogo) |
+
+## Ferramentas
+
+| Ferramenta | Licença | Uso |
+|---|---|---|
+| Godot Engine 4.6.3 | MIT | engine, export, testes headless |
+| Mesa/llvmpipe | MIT | medição de FPS em software |
+| ffmpeg | LGPL/GPL | geração do GIF a partir de capturas reais |
 
 ## Regras
 

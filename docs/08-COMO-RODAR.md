@@ -53,11 +53,20 @@ Saída esperada:
 
 ```
 == Home Switch — testes ==
-Verificações: 30 | Falhas: 0
+-- diálogos/conteúdo
+-- energia/baseline
+-- fluxo objetivo → ação → avanço
+-- smoke das cenas
+-- partida completa (HUD, relatório, reinício)
+-- UI do diálogo (teclado, clique e F1)
+-- entrada, raycast e atalhos
+Verificações: 227 | Falhas: 0
 OK
 ```
 
-O runner retorna código 1 em falha — é isso que quebra o CI.
+O runner retorna código 1 em falha — é isso que quebra o CI. Ele roda no primeiro frame
+do `SceneTree`, depois que os autoloads executaram `_ready()`; por isso os testes de cena
+e de input funcionam headless.
 
 ## Exportar para web
 
@@ -99,14 +108,28 @@ Configuração única no GitHub:
 
 ## Exportar para desktop
 
-Crie presets no editor (**Project → Export**) para Linux e Windows, instale os templates
-e use:
+Os presets `Linux` e `Windows Desktop` já estão em `export_presets.cfg` (x86_64, PCK
+embutido). Instale os templates e rode:
 
 ```bash
+mkdir -p build/linux build/windows
 godot --headless --path . --export-release "Linux" build/linux/home-switch.x86_64
+godot --headless --path . --export-release "Windows Desktop" build/windows/home-switch.exe
 ```
 
-Não commitar builds: `build/` está no `.gitignore`.
+Não commitar builds: `build/` está no `.gitignore`. Os exports já foram validados
+(Web ~38 MB de wasm + Linux/Windows ~70/105 MB com o template embutido).
+
+## Benchmark de FPS
+
+Com display (ou `xvfb-run`), rode a partida real e meça:
+
+```bash
+godot --path . --script tools/benchmark_fps.gd
+# BENCHMARK frames=300 elapsed=... fps=89.0 engine_fps=94.0
+```
+
+No jogo, `F3` mostra o FPS ao vivo. Referência medida em llvmpipe (software): 90–100 FPS.
 
 ## CI (GitHub Actions)
 
@@ -114,6 +137,16 @@ Não commitar builds: `build/` está no `.gitignore`.
 |---|---|---|
 | `ci.yml` | push em `main`/`dev` e PRs | importa o projeto, roda testes e valida JSONs |
 | `export-web.yml` | tag `v*` ou manual | exporta web e publica no Pages |
+
+## Atalhos de apresentação
+
+| Tecla | Ação |
+|---|---|
+| `F1` | alterna EN+PT / EN / PT |
+| `F3` | FPS |
+| `F4` | encerra o dia na hora (debug) |
+| clique | recaptura o mouse no navegador |
+| `R` | na tela de relatório, reinicia |
 
 ## Problemas comuns
 
@@ -160,7 +193,7 @@ Editar `.github/CODEOWNERS` com os usuários reais e ativar
 
 - [ ] Instalou Godot 4.6.3.
 - [ ] Clonou o repositório.
-- [ ] Rodou `--import` e os testes (30 OK).
+- [ ] Rodou `--import` e os testes (227 OK).
 - [ ] Leu `docs/02-ARQUITETURA.md` e `docs/06-DIVISAO-TRABALHO.md`.
 - [ ] Criou a branch `feat/<area>-<nome>`.
 - [ ] Abriu o primeiro PR pequeno.

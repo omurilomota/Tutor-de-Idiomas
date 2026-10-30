@@ -61,7 +61,10 @@
       "speaker": "Alex",
       "en": "Perfect! That's 'turn off the light'.",
       "pt": "Perfeito! Isso é 'turn off the light'.",
-      "vocab": [{ "en": "turn off the light", "pt": "apagar a luz" }],
+      "vocab": [
+        { "en": "turn off the light", "pt": "apagar a luz" },
+        { "en": "light", "pt": "luz" }
+      ],
       "next": "pedido_tv"
     },
     "pedido_tv": {
@@ -98,7 +101,10 @@
       "speaker": "Alex",
       "en": "Great! The TV uses 110 watts. That's 'turn off the TV'.",
       "pt": "Ótimo! A TV usa 110 watts. Isso é 'turn off the TV'.",
-      "vocab": [{ "en": "turn off the TV", "pt": "desligar a TV" }],
+      "vocab": [
+        { "en": "turn off the TV", "pt": "desligar a TV" },
+        { "en": "TV", "pt": "televisão" }
+      ],
       "next": "pedido_ar"
     },
     "pedido_ar": {
@@ -126,17 +132,31 @@
     },
     "objetivo_ar": {
       "speaker": "Alex",
-      "en": "Set the air conditioner to eco.",
+      "en": "Set the air conditioner to eco mode.",
       "pt": "Coloque o ar-condicionado no modo eco.",
       "objective": { "device": "ar_sala", "state": "eco" },
+      "next": "ar_ok"
+    },
+    "ar_ok": {
+      "speaker": "Alex",
+      "en": "Eco mode uses 550 watts instead of 1400. Big difference!",
+      "pt": "O modo eco usa 550 watts em vez de 1400. Grande diferença!",
+      "vocab": [
+        { "en": "eco mode", "pt": "modo econômico" },
+        { "en": "air conditioner", "pt": "ar-condicionado" },
+        { "en": "watt", "pt": "watt (unidade de potência)" }
+      ],
       "next": "fim"
     },
     "fim": {
       "speaker": "Alex",
-      "en": "Nice work! You saved energy and learned some English. Let's check the report.",
-      "pt": "Bom trabalho! Você economizou energia e aprendeu inglês. Vamos ver o relatório.",
-      "end": true,
-      "vocab": [{ "en": "save energy", "pt": "economizar energia" }]
+      "en": "Nice work! You saved energy and learned some English. Let's keep going.",
+      "pt": "Bom trabalho! Você economizou energia e aprendeu inglês. Vamos continuar.",
+      "vocab": [
+        { "en": "save energy", "pt": "economizar energia" },
+        { "en": "energy", "pt": "energia" }
+      ],
+      "end": true
     }
   }
 }

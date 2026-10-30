@@ -36,10 +36,13 @@ Resumo do que já está previsto:
 
 | Categoria | Asset | Autor | Licença | Status |
 |---|---|---|---|---|
-| Modelos | kit de móveis low-poly | Kenney | CC0 | a baixar |
-| Modelos | eletrodomésticos | Quaternius | CC0 | a baixar |
-| Fonte | Inter ou Roboto | Google Fonts | OFL | a baixar |
-| Áudio | cliques e ambiente | Freesound (CC0) | CC0 | opcional |
+| Modelos | sala + móveis + 4 aparelhos (procedural low-poly) | Equipe Home Switch | CC0 | ✅ feito |
+| Fonte | fonte padrão do Godot (Noto Sans) | Godot/Google | OFL | ✅ embutida na engine |
+| Áudio | cliques e ambiente | — | — | opcional, fora do MVP |
+
+A decisão de fazer a geometria procedural foi tomada para não adicionar dependência
+externa, manter o build leve e garantir licença. Os kits Kenney/Quaternius ficam como
+opção de arte final; se entrarem, precisam ser registrados em `CREDITOS.md`.
 
 ## Checklist de importação
 

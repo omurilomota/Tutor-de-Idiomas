@@ -28,6 +28,22 @@
 
 A ordem importa: `DialogueManager._ready()` conecta em `EnergyManager.device_changed`.
 
+## Cenas e nós
+
+| Cena | Script | Papel |
+|---|---|---|
+| `cenas/main/Main.tscn` | `scripts/main/Main.gd` | orquestra dia, sequência de 4 diálogos, fim do dia e reinício |
+| `cenas/salas/SalaEstar.tscn` | — | sala, móveis, spawn, 4 nós `EnergyDevice3D` |
+| `cenas/player/Player.tscn` | `PlayerController.gd` + `Interactor.gd` | FPS, câmera e raycast de 2,5 m |
+| `cenas/ui/HUD.tscn` | `HUD.gd` + `MedidorEnergia.gd` | relógio, medidor, dispositivos, prompt, objetivo, FPS |
+| `cenas/ui/CaixaDialogo.tscn` | `CaixaDialogo.gd` | typewriter, escolhas 1–4, F1, bloqueio no objetivo |
+| `cenas/ui/CartaoVocabulario.tscn` | `CartaoVocabulario.gd` | fila de cartões de vocabulário |
+| `cenas/ui/TelaRelatorio.tscn` | `TelaRelatorio.gd` | relatório final e botão reiniciar |
+
+`EnergyDevice3D` é um `StaticBody3D` na camada de colisão 2: o jogador anda na camada 1
+e o `Interactor` só enxerga dispositivos. Cada nó guarda `device_id` e um filho `Glow`
+(visível quando ligado), então o mesmo script serve para lâmpada, TV, ar e carregador.
+
 ## Sinais
 
 ```gdscript
@@ -125,14 +141,26 @@ função de consumo — não é um número digitado.
 Teste obrigatório na Fase 0/1: FPS no PC mais fraco da equipe. Se <30 FPS, plano B:
 Godot 3.6 ou reduzir a sala a 2 objetos interativos.
 
+**Medição feita:** `tools/benchmark_fps.gd` rodou a partida real a 1280×720 em
+**llvmpipe** (renderizador por software da Mesa): **≈90–100 FPS** em 300 frames. Como o
+llvmpipe é mais lento que a GPU integrada de um PC fraco, o gate de 30 FPS está coberto
+por margem. O monitor de FPS do jogo fica em `F3`.
+
 ## Testes
 
 | Arquivo | Cobre |
 |---|---|
-| `testes/test_dialogos.gd` | JSON válido, referências, órfãos, objetivos, campos vazios |
-| `testes/test_energia.gd` | consumo, eco, baseline, relatório, simulação de 1 h |
+| `testes/test_dialogos.gd` | 4 árvores válidas, referências, órfãos, objetivos, campos vazios, ≥25 palavras |
+| `testes/test_energia.gd` | consumo, eco, baseline, relatório, balanceamento, fim do dia pelo relógio, simulação de 1 h |
+| `testes/test_fluxo.gd` | objetivo → ação → avanço, ação errada, pausa do tempo, sequência dos 4 diálogos |
+| `testes/test_cenas.gd` | smoke: sala, 4 dispositivos, player, câmera, Interactor, UI e nós `%` |
+| `testes/test_partida.gd` | partida completa: HUD, relatório, reinício sem trocar de cena |
+| `testes/test_ui.gd` | caixa de diálogo: escolha por tecla (1–4) e clique, foco dos botões e os 3 modos do F1 |
+| `testes/test_input.gd` | Input Map, WASD, mouse, raycast E, F1, F3 e F4 |
 
 Runner: `testes/run_tests.gd` (sem addons). Retorna código 1 em falha, o que quebra o CI.
+Total atual: **227 verificações**. O runner roda no primeiro frame do SceneTree, depois que
+os autoloads executaram `_ready()` (as conexões de sinal ainda não existem em `_initialize`).
 
 ## Decisões registradas
 
@@ -142,4 +170,7 @@ Runner: `testes/run_tests.gd` (sem addons). Retorna código 1 em falha, o que qu
 | Validador próprio | addon de diálogo | menos dependência, regras do projeto |
 | Simulação em tempo real | energia só no fim | a banca cobra mecânica, não tela final |
 | Baseline calculado | número fixo | defensável e testável |
+| Reset dos devices no lugar | recarregar o JSON em `start_day()` | nós 3D guardam referência; recarregar deixava prompt/visual presos no estado antigo |
+| Câmera mira via camada 2 | filtro por tipo no raycast | separa andar de interagir sem `get_node("../../")` |
 | Sem threads no web | export com threads | GitHub Pages não envia COOP/COEP |
+| Teste de física espera `physics_frame` | chamar `_physics_process` à mão no teste | `move_and_slide()` só lê contatos sincronizados no passo real do engine; com chamada manual o deslocamento variava entre 0,08 m e 0,85 m conforme o timing (teste intermitente). Com awaits de física o teste ficou determinístico (35/35 execuções verdes) |

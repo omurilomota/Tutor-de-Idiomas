@@ -1,0 +1,105 @@
+{
+  "id": "sala_02",
+  "titulo": "Carregador e luminária",
+  "descricao": "Tirar o carregador da tomada, acender a luminária e entender o standby.",
+  "start": "intro",
+  "nodes": {
+    "intro": {
+      "speaker": "Alex",
+      "en": "My phone is charged. The charger is still in the outlet, wasting power.",
+      "pt": "Meu celular está carregado. O carregador continua na tomada, desperdiçando energia.",
+      "choices": [
+        {
+          "en": "I can unplug it.",
+          "pt": "Eu posso tirar da tomada.",
+          "next": "pedido_charger"
+        },
+        {
+          "en": "Does it use a lot of power?",
+          "pt": "Ele usa muita energia?",
+          "next": "explica_charger"
+        }
+      ]
+    },
+    "explica_charger": {
+      "speaker": "Alex",
+      "en": "Only 5 watts, but all day it adds up. Please unplug it.",
+      "pt": "Só 5 watts, mas o dia inteiro soma. Por favor, tire da tomada.",
+      "next": "pedido_charger"
+    },
+    "pedido_charger": {
+      "speaker": "Alex",
+      "en": "Walk to the charger and press E to unplug it.",
+      "pt": "Vá até o carregador e aperte E para tirar da tomada.",
+      "next": "objetivo_charger"
+    },
+    "objetivo_charger": {
+      "speaker": "Alex",
+      "en": "Unplug the charger, please.",
+      "pt": "Tire o carregador da tomada, por favor.",
+      "objective": { "device": "tomada_carregador", "state": "off" },
+      "next": "charger_ok"
+    },
+    "charger_ok": {
+      "speaker": "Alex",
+      "en": "Thanks! That's 'unplug the charger'.",
+      "pt": "Valeu! Isso é 'unplug the charger'.",
+      "vocab": [
+        { "en": "unplug the charger", "pt": "tirar o carregador da tomada" },
+        { "en": "charger", "pt": "carregador" },
+        { "en": "phone", "pt": "celular" }
+      ],
+      "next": "pedido_luz_on"
+    },
+    "pedido_luz_on": {
+      "speaker": "Alex",
+      "en": "It's dark in this corner. Could you turn on the light?",
+      "pt": "Está escuro neste canto. Você pode acender a luz?",
+      "next": "objetivo_luz_on"
+    },
+    "objetivo_luz_on": {
+      "speaker": "Alex",
+      "en": "Press E near the lamp to turn it on.",
+      "pt": "Aperte E perto da lâmpada para acendê-la.",
+      "objective": { "device": "lampada_sala", "state": "on" },
+      "next": "luz_on_ok"
+    },
+    "luz_on_ok": {
+      "speaker": "Alex",
+      "en": "Good. What is the opposite of 'turn off'?",
+      "pt": "Bom. Qual é o oposto de 'turn off'?",
+      "vocab": [
+        { "en": "turn on the light", "pt": "acender a luz" },
+        { "en": "light switch", "pt": "interruptor de luz" }
+      ],
+      "choices": [
+        {
+          "en": "\"Turn on\".",
+          "pt": "\"Turn on\" (ligar).",
+          "next": "fim"
+        },
+        {
+          "en": "\"Turn down\".",
+          "pt": "\"Turn down\" (abaixar).",
+          "next": "standby_explica"
+        }
+      ]
+    },
+    "standby_explica": {
+      "speaker": "Alex",
+      "en": "Not quite. 'Turn on' is the opposite of 'turn off'. 'Standby' is when the TV is off but still uses power.",
+      "pt": "Quase. 'Turn on' é o oposto de 'turn off'. 'Standby' é quando a TV está desligada mas ainda usa energia.",
+      "next": "fim"
+    },
+    "fim": {
+      "speaker": "Alex",
+      "en": "Standby power is small, but it never sleeps. Good to know!",
+      "pt": "A energia em standby é pequena, mas nunca dorme. Bom saber!",
+      "vocab": [
+        { "en": "standby", "pt": "modo de espera" },
+        { "en": "outlet", "pt": "tomada" }
+      ],
+      "end": true
+    }
+  }
+}

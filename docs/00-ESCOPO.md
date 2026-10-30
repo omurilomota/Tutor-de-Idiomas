@@ -1,5 +1,18 @@
 # 00 — Escopo
 
+## Estado atual (entrega)
+
+| Critério de aceite | Situação |
+|---|---|
+| 1. Abre no Godot 4.6 sem erros | ✅ `godot --headless --path . --import` sem erros |
+| 2. ≥30 FPS no PC fraco | ✅ 90–100 FPS a 1280×720 em renderizador **software** (llvmpipe), proxy mais pesado que o PC da equipe; ver doc 13 |
+| 3. Build web jogável | ✅ export Web gerado; build local em `build/web` |
+| 4. Ação altera o medidor e destrava o diálogo | ✅ teste de fluxo + teste de partida |
+| 5. Relatório fecha a conta | ✅ `economia = baseline − jogador`, testado com tolerância |
+| 6. CI verde | ✅ 227 verificações locais; o workflow `ci.yml` roda a mesma suíte no push (não executado no GitHub nesta sessão) |
+| 7. README com GIF, controles, stack e créditos | ✅ |
+| 8. Vídeo de 3 min e ensaio de 5 min | ⏳ roteiro pronto em docs 11/12; gravação e ensaio são presenciais |
+
 ## Problema
 
 Aprender inglês exige prática em contexto, mas cursos tradicionais separam vocabulário

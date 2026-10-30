@@ -56,7 +56,7 @@ Regras de level design:
 |---|---|---|---|---|---|
 | `lampada_sala` | Lâmpada | 60 W | 0 W | — | apagar |
 | `tv_sala` | TV | 110 W | 8 W | — | desligar (standby continua) |
-| `ar_sala` | Ar-condicionado | 1400 W | 5 W | 900 W | ciclo: ligado → eco → desligado |
+| `ar_sala` | Ar-condicionado | 1400 W | 5 W | 550 W | ciclo: ligado → eco → desligado |
 | `tomada_carregador` | Carregador | 5 W | 0 W | — | tirar da tomada |
 
 O ciclo do ar-condicionado é genérico: qualquer dispositivo com `watt_eco > 0` alterna
@@ -65,7 +65,8 @@ O ciclo do ar-condicionado é genérico: qualquer dispositivo com `watt_eco > 0`
 ## NPC — Alex
 
 - Colega de quarto, tom amigável, frases curtas (A1–A2).
-- 1 árvore no MVP (`dialogos/sala_01.json`), 3 objetivos.
+- 4 árvores encadeadas (`dialogos/sala_01..04.json`), 9 objetivos físicos no total.
+- 32 palavras/frases únicas no glossário da partida.
 - Sem voz no MVP: texto em inglês + legenda em português.
 - Escolhas sem cronômetro (tempo de leitura livre).
 
@@ -76,6 +77,9 @@ O ciclo do ar-condicionado é genérico: qualquer dispositivo com `watt_eco > 0`
 | 1 | apagar a luz | vocabulário “turn off the light” |
 | 2 | desligar a TV | vocabulário “turn off the TV” + dica de standby |
 | 3 | colocar o ar no eco | vocabulário “eco mode” |
+| 4 | tirar o carregador e acender a luz | “unplug the charger”, “turn on the light” |
+| 5 | desligar o ar e apagar a luz | “turn off the air conditioner”, “energy meter” |
+| 6 | ligar/desligar a TV e quiz | “kilowatt-hour”, “electricity bill” |
 | fim | relatório | nota A–D + glossário da partida |
 
 ## HUD
@@ -84,7 +88,8 @@ O ciclo do ar-condicionado é genérico: qualquer dispositivo com `watt_eco > 0`
 - **Lateral:** dispositivos “smart” com estado (ON/OFF/ECO) — camada de IoT simulada.
 - **Centro:** caixa de diálogo (EN grande, PT menor).
 - **Rodapé:** prompt de interação (“E — turn off the TV / desligar a TV”).
-- **F1:** alterna EN+PT / EN / PT.
+- **F1:** alterna EN+PT / EN / PT. **F3:** overlay de FPS. **F4:** encerra o dia (debug).
+- O medidor e o prompt não são cobertos pela caixa de diálogo (layout testado em 1280×720).
 
 ## Relógio e ritmo
 
@@ -110,7 +115,9 @@ O ciclo do ar-condicionado é genérico: qualquer dispositivo com `watt_eco > 0`
 | E | interagir / avançar |
 | 1–4 | escolher resposta |
 | F1 | legenda |
-| Esc | liberar mouse |
+| F3 | overlay de FPS |
+| F4 | encerrar o dia (debug de apresentação) |
+| Esc / clique | liberar/recapturar mouse |
 
 ## Direção de arte
 

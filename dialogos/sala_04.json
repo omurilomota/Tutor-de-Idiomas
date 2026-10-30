@@ -1,0 +1,103 @@
+{
+  "id": "sala_04",
+  "titulo": "Vocabulário do consumo",
+  "descricao": "Ligar e desligar a TV para revisar o vocabulário e fechar o dia.",
+  "start": "intro",
+  "nodes": {
+    "intro": {
+      "speaker": "Alex",
+      "en": "Time to review. Can you turn on the TV first?",
+      "pt": "Hora de revisar. Você pode ligar a TV primeiro?",
+      "next": "objetivo_tv_on"
+    },
+    "objetivo_tv_on": {
+      "speaker": "Alex",
+      "en": "Turn on the TV, please.",
+      "pt": "Ligue a TV, por favor.",
+      "objective": { "device": "tv_sala", "state": "on" },
+      "next": "tv_on_ok"
+    },
+    "tv_on_ok": {
+      "speaker": "Alex",
+      "en": "That's 'turn on the TV'. The screen is on, using 110 watts.",
+      "pt": "Isso é 'turn on the TV'. A tela está ligada, usando 110 watts.",
+      "vocab": [
+        { "en": "turn on the TV", "pt": "ligar a TV" },
+        { "en": "screen", "pt": "tela" }
+      ],
+      "next": "pedido_tv_off"
+    },
+    "pedido_tv_off": {
+      "speaker": "Alex",
+      "en": "Now turn it off again. Even off, the TV uses 8 watts in standby.",
+      "pt": "Agora desligue de novo. Mesmo desligada, a TV usa 8 watts em standby.",
+      "next": "objetivo_tv_off"
+    },
+    "objetivo_tv_off": {
+      "speaker": "Alex",
+      "en": "Turn off the TV and we will check the numbers.",
+      "pt": "Desligue a TV e vamos conferir os números.",
+      "objective": { "device": "tv_sala", "state": "off" },
+      "next": "tv_off_ok"
+    },
+    "tv_off_ok": {
+      "speaker": "Alex",
+      "en": "Nice. The TV is off, but standby still costs a little.",
+      "pt": "Bom. A TV está desligada, mas o standby ainda custa um pouco.",
+      "vocab": [
+        { "en": "standby power", "pt": "energia em standby" },
+        { "en": "small", "pt": "pequeno" }
+      ],
+      "next": "quiz"
+    },
+    "quiz": {
+      "speaker": "Alex",
+      "en": "Quick quiz: what is one kilowatt-hour?",
+      "pt": "Quiz rápido: o que é um quilowatt-hora?",
+      "choices": [
+        {
+          "en": "Using 1 kW for 1 hour.",
+          "pt": "Usar 1 kW durante 1 hora.",
+          "next": "quiz_correct"
+        },
+        {
+          "en": "Using 1 watt for 1 minute.",
+          "pt": "Usar 1 watt durante 1 minuto.",
+          "next": "quiz_wrong"
+        },
+        {
+          "en": "A type of battery.",
+          "pt": "Um tipo de bateria.",
+          "next": "quiz_wrong"
+        }
+      ]
+    },
+    "quiz_correct": {
+      "speaker": "Alex",
+      "en": "Correct! One kilowatt-hour is 1 kW for 1 hour. The bill uses kWh.",
+      "pt": "Correto! Um quilowatt-hora é 1 kW por 1 hora. A conta usa kWh.",
+      "vocab": [
+        { "en": "kilowatt-hour", "pt": "quilowatt-hora" },
+        { "en": "electricity bill", "pt": "conta de luz" },
+        { "en": "carbon dioxide", "pt": "dióxido de carbono" }
+      ],
+      "next": "fim"
+    },
+    "quiz_wrong": {
+      "speaker": "Alex",
+      "en": "Almost. One kilowatt-hour is 1 kW for 1 hour. The bill uses kWh.",
+      "pt": "Quase. Um quilowatt-hora é 1 kW por 1 hora. A conta usa kWh.",
+      "next": "fim"
+    },
+    "fim": {
+      "speaker": "Alex",
+      "en": "Great job today! Let's check the report and see our savings.",
+      "pt": "Bom trabalho hoje! Vamos ver o relatório e conferir a economia.",
+      "vocab": [
+        { "en": "report", "pt": "relatório" },
+        { "en": "savings", "pt": "economia" }
+      ],
+      "end": true
+    }
+  }
+}

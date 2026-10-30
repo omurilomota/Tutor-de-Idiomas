@@ -64,7 +64,14 @@ func load_data() -> bool:
 
 
 func start_day() -> void:
-	load_data()
+	# Reseta os dispositivos NO LUGAR: os nós 3D guardam referência a eles.
+	# Recarregar o JSON aqui deixaria as referências antigas (bug real de
+	# prompt/visual depois do reinício).
+	if devices.is_empty() or config.is_empty():
+		if not load_data():
+			return
+	for device in devices.values():
+		device.reset()
 	running = true
 	paused = false
 	day_ended = false
@@ -75,12 +82,37 @@ func start_day() -> void:
 	actions.clear()
 	vocabulary.clear()
 	set_process(true)
+	for device_id in devices.keys():
+		var device = devices[device_id]
+		device_changed.emit(device_id, device.is_on, device.current_watts())
 	_emit_energy()
 	clock_updated.emit(clock_minutes)
 
 
 func set_paused(value: bool) -> void:
 	paused = value
+
+
+func get_state(device_id: String) -> String:
+	if not devices.has(device_id):
+		return ""
+	return devices[device_id].state_name()
+
+
+func get_next_state(device_id: String) -> String:
+	if not devices.has(device_id):
+		return ""
+	return devices[device_id].next_state()
+
+
+func elapsed_hours() -> float:
+	return clock_seconds / 3600.0
+
+
+func day_hours() -> float:
+	var start_minutes := float(config.get("inicio_minutos", 480))
+	var end_minutes := float(config.get("fim_minutos", 1320))
+	return maxf((end_minutes - start_minutes) / 60.0, 1.0)
 
 
 func _process(delta: float) -> void:
@@ -162,10 +194,7 @@ func unlock_vocabulary(entry: Dictionary) -> void:
 
 
 func compute_baseline_kwh() -> float:
-	var start_minutes := float(config.get("inicio_minutos", 480))
-	var end_minutes := float(config.get("fim_minutos", 1320))
-	var day_hours := maxf((end_minutes - start_minutes) / 60.0, 1.0)
-	return EnergyReportScript.baseline_kwh(devices, baseline_profile, day_hours)
+	return EnergyReportScript.baseline_kwh(devices, baseline_profile, day_hours())
 
 
 func finish_day() -> void:
@@ -173,6 +202,7 @@ func finish_day() -> void:
 		return
 	day_ended = true
 	running = false
+	paused = false
 	set_process(false)
 	var report: Dictionary = EnergyReportScript.build(
 		kwh,

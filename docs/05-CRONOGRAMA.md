@@ -4,6 +4,17 @@ O prazo da atividade ainda não foi definido, então o cronograma é **relativo*
 tem um gate objetivo e só avança quando o gate passa. Ritmo assumido: 8–10 h/semana por
 pessoa (≈ 4–5 semanas no total).
 
+## Estado em 24/10/2026
+
+| Fase | Estado | Evidência |
+|---|---|---|
+| **0. Fundação** | ✅ concluída | CI, testes, build web |
+| **1. Vertical slice** | ✅ concluída | sala, player, 4 devices, HUD, teste de input |
+| **2. Diálogo** | ✅ concluída | 4 árvores, caixa com typewriter/escolhas, objetivo travado |
+| **3. Conteúdo e arte** | ✅ concluída | 32 palavras, relatório, balanceamento, props procedurais |
+| **4. Polimento** | ✅ concluída | 227 testes, ~96 FPS em software (faixa 90–100), acessibilidade |
+| **5. Entrega** | ⏳ parcial | README/GIF/builds prontos; faltam vídeo, ensaio presencial, tag/push e convites |
+
 ## Visão geral
 
 | Fase | Duração | Objetivo | Gate |
@@ -28,7 +39,7 @@ pessoa (≈ 4–5 semanas no total).
 **Gate:** `godot --headless --path . --script testes/run_tests.gd` → OK.
 Build web gerado. Teste de FPS no PC fraco fica como primeira tarefa da Fase 1.
 
-## Fase 1 — Vertical slice (1 semana)
+## Fase 1 — Vertical slice (concluída)
 
 | Responsável | Tarefa |
 |---|---|
@@ -38,7 +49,7 @@ Build web gerado. Teste de FPS no PC fraco fica como primeira tarefa da Fase 1.
 
 **Gate:** andar pela sala, mirar na TV, apertar E e ver `kW`/`kWh` caírem.
 
-## Fase 2 — Diálogo (1 semana)
+## Fase 2 — Diálogo (concluída)
 
 | Responsável | Tarefa |
 |---|---|
@@ -48,7 +59,7 @@ Build web gerado. Teste de FPS no PC fraco fica como primeira tarefa da Fase 1.
 
 **Gate:** Alex pede “turn off the TV”; o diálogo fica travado até a TV ser desligada.
 
-## Fase 3 — Conteúdo e arte (1 semana)
+## Fase 3 — Conteúdo e arte (concluída)
 
 | Responsável | Tarefa |
 |---|---|
@@ -58,17 +69,17 @@ Build web gerado. Teste de FPS no PC fraco fica como primeira tarefa da Fase 1.
 
 **Gate:** partida completa do início ao relatório, sem erro no console.
 
-## Fase 4 — Polimento (3–5 dias)
+## Fase 4 — Polimento (concluída)
 
 - Acessibilidade: contraste, tamanho de fonte, legenda sempre disponível.
 - Áudio (se houver): CC0 documentado.
 - Performance: medir FPS, reduzir draw calls, testar no PC fraco.
-- QA: checklist de 20 casos (interações, escolhas, reinício, web).
+- QA: checklist de 22 casos (interações, escolhas, reinício, web).
 - Correção de bugs com label `tipo:bug`.
 
 **Gate:** ≥30 FPS no PC fraco, 0 bug bloqueante, build web atualizado.
 
-## Fase 5 — Entrega (2–3 dias)
+## Fase 5 — Entrega (parcial)
 
 - README com GIF e link do build.
 - Vídeo de 3 min: pitch → gameplay → arquitetura → energia → limitações.
@@ -88,14 +99,21 @@ Build web gerado. Teste de FPS no PC fraco fica como primeira tarefa da Fase 1.
 | Revisão de PR | contínua | — | em até 24 h |
 | Playtest interno | fim de fase | 15 min | 3 bugs + 1 ajuste |
 
-## Backlog imediato (Fase 1)
+## Backlog imediato (Fase 1 — concluído)
 
-1. `art`: blockout da sala com medidas e spawn.
-2. `feat`: `Player.tscn` com `CharacterBody3D` + câmera.
-3. `feat`: `Interactor` + prompt bilíngue.
-4. `feat`: `EnergyDevice` como nó de cena, ligado ao `EnergyManager`.
-5. `feat`: HUD com relógio e medidor.
-6. `test`: medir FPS no PC fraco e registrar no issue.
+1. ~~`art`: blockout da sala com medidas e spawn.~~
+2. ~~`feat`: `Player.tscn` com `CharacterBody3D` + câmera.~~
+3. ~~`feat`: `Interactor` + prompt bilíngue.~~
+4. ~~`feat`: `EnergyDevice` como nó de cena, ligado ao `EnergyManager`.~~
+5. ~~`feat`: HUD com relógio e medidor.~~
+6. ~~`test`: medir FPS no PC fraco e registrar no issue.~~ (medido em software: 90–100 FPS)
+
+## Próximos passos (entrega)
+
+1. `docs`: gravar o vídeo de 3 min seguindo `docs/12-ROTEIRO-VIDEO.md`.
+2. `docs`: ensaiar a apresentação de 5 min (`docs/11-SLIDES-E-ENSAIO.md`).
+3. `infra`: push de `dev` → `main`, tag `v1.0`, release com builds Linux/Windows/Web.
+4. `infra`: convidar os três colaboradores e subir a proteção da `main` para 1 aprovação.
 
 ## Plano B por tempo
 

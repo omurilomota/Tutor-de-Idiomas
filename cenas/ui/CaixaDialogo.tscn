@@ -1,0 +1,86 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogo/CaixaDialogo.gd" id="1_sb2h5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdtsx"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.035, 0.05, 0.07, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.12)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CaixaDialogo" type="Control" unique_id=1306300466]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_sb2h5")
+
+[node name="Painel" type="PanelContainer" parent="." unique_id=1667269514]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = -320.0
+offset_right = -150.0
+offset_bottom = -28.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tdtsx")
+
+[node name="Margem" type="MarginContainer" parent="Painel" unique_id=814735937]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Conteudo" type="VBoxContainer" parent="Painel/Margem" unique_id=1422870370]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Fala" type="Label" parent="Painel/Margem/Conteudo" unique_id=1604889219]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.55, 0.85, 0.68, 1)
+text = "Alex"
+
+[node name="TextoEN" type="Label" parent="Painel/Margem/Conteudo" unique_id=691344220]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.96, 0.97, 0.98, 1)
+autowrap_mode = 3
+
+[node name="TextoPT" type="Label" parent="Painel/Margem/Conteudo" unique_id=1112231330]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.78, 0.83, 0.88, 1)
+autowrap_mode = 3
+
+[node name="ListaEscolhas" type="VBoxContainer" parent="Painel/Margem/Conteudo" unique_id=232555369]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="DicaContinuar" type="Label" parent="Painel/Margem/Conteudo" unique_id=939122093]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.95, 0.82, 0.45, 1)
+horizontal_alignment = 2

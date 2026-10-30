@@ -1,10 +1,10 @@
 {
   "versao": 1,
-  "descricao": "Perfil de desperdício: tudo ligado o dia inteiro, ar a 18 °C por 6 h. O relatório roda a MESMA simulação com este perfil para calcular a economia.",
+  "descricao": "Perfil de desperdício: tudo ligado das 08:00 às 22:00, ar em 18 °C o dia inteiro. O relatório roda a MESMA simulação com este perfil para calcular a economia.",
   "horas_ligado": {
     "lampada_sala": 14,
     "tv_sala": 14,
-    "ar_sala": 6,
+    "ar_sala": 14,
     "tomada_carregador": 14
   },
   "modo_ar": "normal"

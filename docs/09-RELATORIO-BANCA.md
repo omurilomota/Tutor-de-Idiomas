@@ -8,6 +8,18 @@ quando executa o pedido na casa. Cada ação altera o consumo em tempo real; no 
 um relatório compara o consumo do jogador com um baseline de desperdício calculado pela
 mesma simulação.
 
+## Resultados medidos
+
+| Métrica | Resultado | Evidência |
+|---|---|---|
+| Conteúdo | 4 diálogos, 9 objetivos, 32 palavras/frases | `dialogos/` + teste |
+| Testes automatizados | **227 verificações, 0 falhas** | `testes/run_tests.gd` |
+| Performance | **≈90–100 FPS** a 1280×720 em llvmpipe (software) | `tools/benchmark_fps.gd` |
+| Baseline | 22,05 kWh/dia | `dados/baseline.json` |
+| Partida ótima | 7,812 kWh → **64,6%** de economia, nota A | `docs/img/relatorio.png` |
+| Builds | Web + Linux + Windows exportados | `export_presets.cfg` |
+| Fim do dia | relógio 08:00→22:00 e relatório com 1 clique | teste de energia + tela |
+
 ## Cobertura dos temas
 
 | Tema | Cobertura | Argumento técnico |
@@ -52,6 +64,10 @@ Dizer isso na apresentação vale mais do que esconder.
 - Sem multiusuário, AR ou VR.
 - Sem save/load.
 - Modelo energético simplificado (potência constante).
+- Sem áudio no MVP (clique, bipe e ambiente ficaram como stretch).
+- Sem teste com usuários reais: a eficácia pedagógica é argumentada, não medida.
+- O baseline é um perfil fixo, não a conta real de uma residência.
+- Performance medida em renderizador por software, não no PC fraco físico da equipe.
 
 ## Trabalhos futuros
 
@@ -68,8 +84,8 @@ Dizer isso na apresentação vale mais do que esconder.
 |---|---|
 | 0:00–0:30 | problema: inglês descontextualizado + energia invisível |
 | 0:30–1:00 | pitch e objetivo |
-| 1:00–3:30 | gameplay: apagar a luz, desligar a TV, ar no eco (mostrar o medidor reagindo) |
-| 3:30–4:15 | relatório final: baseline, economia, R$, CO₂, nota |
+| 1:00–3:30 | gameplay: apagar a luz, desligar a TV, ar no eco e carregador (medidor reagindo) |
+| 3:30–4:15 | relatório final (F4): baseline 22,05 kWh, economia 64,6%, R$, CO₂, nota A |
 | 4:15–4:45 | arquitetura: autoloads, JSON, validação, CI |
 | 4:45–5:00 | limitações e trabalhos futuros |
 
@@ -102,7 +118,10 @@ recebe uma explicação mais simples.
 
 **“Qual foi a maior dificuldade técnica?”**
 A integração diálogo↔energia: o diálogo precisa esperar um evento do mundo físico sem
-travar a UI. Resolvemos com uma máquina de estados e o estado `objective`.
+travar a UI. Resolvemos com uma máquina de estados e o estado `objective`. Também
+tivemos um bug de referência antiga quando o dia reiniciava: o `EnergyManager` recarregava
+o JSON e os nós 3D ficavam apontando para objetos velhos; a correção foi resetar os
+dispositivos no lugar (documentada em `docs/02-ARQUITETURA.md`).
 
 **“Como foi a divisão do time?”**
 Um dono por pasta, contrato de cenas com nomes únicos e PRs pequenos. O CI impede merge
@@ -112,6 +131,7 @@ com diálogo inválido.
 
 - Link do build web (GitHub Pages).
 - Print do CI verde.
-- Print do relatório final.
-- Vídeo de 3 min.
+- `docs/img/gameplay.gif`, `inicio.png`, `objetivo.png`, `vocabulario.png` e `relatorio.png`.
+- Vídeo de 3 min (roteiro em `docs/12-ROTEIRO-VIDEO.md`).
+- Slides e ensaio (doc 11).
 - Histórico de PRs (mostra o processo).
